@@ -44,3 +44,33 @@ router.get('/video/:id', (req, res) => {
         fs.createReadStream(videoPath).pipe(res);
     }
 });
+
+
+  router.post('/api/data',(req,res)=>{
+    const data = req.body;
+  // Convert JSON to plain text
+  let text = JSON.stringify(data);
+  // Write the text to a file
+  fs.writeFileSync('data.txt', text);
+  res.send({ message: 'Data received and saved as text' });
+  console.log(body);
+
+
+  });
+
+
+   router.post('/data',(req,res) => {
+    
+    var data = req.body.tejas; // your data 
+    data=data+"\n";
+	console.log("hello got the request"); 
+	console.log(data); 
+    fs.appendFile(`${__dirname}/BufferTimeLogs/without_cache.txt`, data, function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
+    res.status(200).json({ 
+		message: "JSON Data received successfully" 
+	}); 
+
+   });
